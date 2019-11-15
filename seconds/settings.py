@@ -25,7 +25,7 @@ SECRET_KEY = '3bl=4(d#jwj_^-pb_g(qnq$oc^&(^90w!0+7$_cfokgz7ov(y='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['seconds.quinner.nl']
 
 
 # Application definition
