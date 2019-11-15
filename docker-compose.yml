@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  # db:
+  #   image: postgres:12-alpine
+  #   environment:
+  #     - TZ=Europe/Amsterdam
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data/
+  web:
+    build: .
+    ports:
+      - 45676:8000
+    # depends_on:
+    #   - db
+    environment:
+      - DEBUG=0
+    volumes:
+      - .:/code
+    command: gunicorn seconds.wsgi -b 0.0.0.0:8000
+# volumes:
+#   postgres_data:
