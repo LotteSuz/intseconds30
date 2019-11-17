@@ -6,17 +6,17 @@
 <div class="text-center">
 <button class="btn btn-primary center-block" id='player' onclick="playGame()"> It's {{player}}'s turn! </button>
 
-<div id="shit">
+
   <div id="words">
   {% for word in card %}
-    <li> {{word}} </li>
+    <li class="h4"> {{word}} </li>
   {% endfor %}
   </div>
 
   <form style="padding-left:50px;"id="guessed" class="form" action="{% url 'seconds'%}" method="post">
     {% for word in card %}
       <input class="form-check-input" type="checkbox" value={{word}} name="words" id="prog1">
-      <label class="form-check-label" for="prog1">
+      <label class="h4" class="form-check-label" for="prog1">
         {{word}}
       </label>
       <br>
@@ -24,12 +24,11 @@
   <button class="btn btn-primary" type="submit"id='next'> Next Round</button>
   </form>
 
-  <div id='seconds-counter'> </div>
-</div>
+  <div class="h3" id='seconds-counter'> </div>
 </div>
 
 <script>
-  var seconds = 2;
+  var seconds = 30;
   var counter = document.getElementById('seconds-counter');
   counter.style.visibility = "hidden";
   var words = document.getElementById("words");
@@ -65,7 +64,6 @@
   function playGame() {
     var cancel = setInterval(incrementSeconds, 1000);
   }
-
 
 </script>
 {% endblock %}

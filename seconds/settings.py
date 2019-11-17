@@ -25,7 +25,7 @@ SECRET_KEY = '3bl=4(d#jwj_^-pb_g(qnq$oc^&(^90w!0+7$_cfokgz7ov(y='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['seconds.quinner.nl']
+ALLOWED_HOSTS = ['seconds.quinner.nl','127.0.0.1']
 
 
 # Application definition
@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 ROOT_URLCONF = 'seconds.urls'
 
 TEMPLATES = [

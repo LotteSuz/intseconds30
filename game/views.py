@@ -2,47 +2,90 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import requests
+from django.views.decorators.http import require_http_methods
 
 team1_hits = []
 team2_hits = []
 round_counter = 0
-max_rounds = 4
+max_rounds = 8
+player_counter = 0
+team1_players = []
+team2_players = []
 # Create your views here.
+
 def index(request):
-    #return render(request, "game/index.html")
+    #return render(request, "game/index.html"
     return render(request, "game/teams.html")
 
 @csrf_exempt
+@require_http_methods(["POST"])
 def seconds(request):
     global round_counter
     global max_rounds
-    res = requests.get("http://127.0.0.1:8000/api/get_token").json()
-    token = res['token']
-    secret = res['secret']
-    if request.method == "POST":
-            hits = request.POST.getlist("words")
-            if round_counter % 2 == 0:
-                print("TEAM_1")
-                for hit in hits:
-                    team1_hits.append(hit)
-            else:
-                print("TEAM_2")
-                for hit in hits:
-                    team2_hits.append(hit)
-            if round_counter == max_rounds:
-                team1 = len(team1_hits)
-                team2 = len(team2_hits)
-                if team1 > team2:
-                    winner_name = 'Team 1'
-                    winner_points = team1
-                    loser_name = 'Team 2'
-                    loser_points = team2
-                else:
-                    winner_name = 'Team 2'
-                    winner_points = team2
-                    loser_name = 'Team 1'
-                    loser_points = team1
-                return render(request, "game/end.html", {'winner_name':winner_name, 'winner_points':winner_points, 'loser_name':loser_name,'loser_points':loser_points})
-            card = requests.get(f"http://127.0.0.1:8000/api/get_card?token={token}&secret={secret}").json()['words']
-            round_counter += 1
-            return render(request, "game/seconds.html", {'card':card, 'player':'john'})
+    global player_counter
+    global team1_hits
+    global team2_hits
+    global team1_players
+    global team2_players
+    if round_counter == 0:
+        res = requests.get("http://127.0.0.1:8000/api/get_token").json()
+        request.session['token'] = res['token']
+        request.session['secret'] = res['secret']
+        for i in range(1,5):
+            if request.POST[f't1{i}'] == '':
+                message = 'Please enter four players for each team'
+                return redirect('index')
+            team1_players.append(request.POST[f't1{i}'])
+        for j in range(1,5):
+            if request.POST[f't2{j}'] == '':
+                message = 'Please enter four players for each team'
+                return redirect('index')
+            team2_players.append(request.POST[f't2{j}'])
+
+    hits = request.POST.getlist("words")
+
+    # append points
+    if round_counter % 2 == 0:
+        request.session['turn'] = team1_players[player_counter]
+        for hit in hits:
+            team1_hits.append(hit)
+    else:
+        request.session['turn'] = team2_players[player_counter]
+        for hit in hits:
+            team2_hits.append(hit)
+            player_counter += 1
+
+    # determine winner
+    if round_counter == max_rounds:
+        round_counter = 0
+        team1_points = len(team1_hits)
+        team2_points = len(team2_hits)
+        team1_players.clear()
+        team2_players.clear()
+        team1_hits.clear()
+        team2_hits.clear()
+        player_counter = 0
+        if team1_points == team2_points:
+            tie = True
+            return render(request, "game/end.html", {'tie':tie})
+        elif team1_points > team2_points:
+            winner_name = 'Team 1'
+            winner_points = team1_points
+            loser_name = 'Team 2'
+            loser_points = team2_points
+            return render(request, "game/end.html", {'winner_name':winner_name, 'winner_points':winner_points, 'loser_name':loser_name,'loser_points':loser_points})
+        elif team1_points < team2_points:
+            winner_name = 'Team 2'
+            winner_points = team2_points
+            loser_name = 'Team 1'
+            loser_points = team1_points
+            return render(request, "game/end.html", {'winner_name':winner_name, 'winner_points':winner_points, 'loser_name':loser_name,'loser_points':loser_points})
+
+
+    # get cards to play with
+    token = request.session['token']
+    secret = request.session['secret']
+    player = request.session['turn']
+    card = requests.get(f"http://127.0.0.1:8000/api/get_card?token={token}&secret={secret}").json()['words']
+    round_counter += 1
+    return render(request, "game/seconds.html", {'card':card, 'player':player})

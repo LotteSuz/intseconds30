@@ -1,12 +1,8 @@
 {% extends "game/layout.html"%}
 {% block body %}
-{%if courses%}
-Let's play!
-You chose the following courses:
-{% for course in courses%}
-<li> {{course}}</li>
-{% endfor %}
-{%endif%}
+{%if message%}
+<h3 class="text-center"> {{message}} </h3>
+{%else%}
 
 <h3 class="text-center"> Choose teams to play the game with! </h3>
 <form class="form" action="{% url 'seconds'%}" method="post">
@@ -20,7 +16,7 @@ You chose the following courses:
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Team member 1</span>
           </div>
-          <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t1">
+          <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t11">
         </div>
     </div>
     </div>
@@ -31,7 +27,7 @@ You chose the following courses:
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Team member 2</span>
           </div>
-          <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t1">
+          <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t12">
         </div>
     </div>
     </div>
@@ -42,7 +38,7 @@ You chose the following courses:
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Team member 3</span>
           </div>
-          <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t1">
+          <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t13">
         </div>
     </div>
 </div>
@@ -52,7 +48,7 @@ You chose the following courses:
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">Team member 4</span>
           </div>
-          <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t1">
+          <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t14">
         </div>
     </div>
   </div>
@@ -67,7 +63,7 @@ You chose the following courses:
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">Team member 1</span>
             </div>
-            <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t2">
+            <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t21">
           </div>
           </div>
           </div>
@@ -79,7 +75,7 @@ You chose the following courses:
   <div class="input-group-prepend">
     <span class="input-group-text" id="basic-addon1">Team member 2</span>
   </div>
-  <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t2">
+  <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t22">
 </div>
 </div>
 </div>
@@ -90,7 +86,7 @@ You chose the following courses:
   <div class="input-group-prepend">
     <span class="input-group-text" id="basic-addon1">Team member 3</span>
   </div>
-  <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t2">
+  <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t23">
 </div>
 </div>
 </div>
@@ -101,7 +97,7 @@ You chose the following courses:
   <div class="input-group-prepend">
     <span class="input-group-text" id="basic-addon1">Team member 4</span>
   </div>
-  <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t2">
+  <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t24">
 </div>
 </div>
 </div>
@@ -109,5 +105,6 @@ You chose the following courses:
 <button class="btn btn-primary" type="submit">Submit teams</button>
 </p>
 </form>
+{%endif%}
 
 {% endblock %}
