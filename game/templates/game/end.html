@@ -1,14 +1,14 @@
-{% extends "game/layout.html"%}
+{% extends "game/layout.html" %}
 {% block body %}
-<div class="text-center">
-<h3> Game finished! </h3>
-{% if tie %}
-<h3> It's a draw! </h3>
-<a href="{% url 'index'%}" method="get">click here to play again! </a>
-{% else %}
-<h3> The winner is {{winner_name}} with {{winner_points}} points!</h3>
-<h5> {{loser_name}} had {{loser_points}} points</h5>
-<a href="{% url 'index'%}" method="get">click here to play again! </a>
-</div>
-{% endif %}
+    <div class="text-center">
+        <h3> Game finished! </h3>
+        {% if tie %}
+            <h3> It's a draw! </h3>
+            <a href="{% url 'index' %}" method="get">click here to play again! </a>
+        {% else %}
+            <h3> The winner is {{ winner_name }} with {{ winner_points }} points!</h3>
+            <h5> {{ loser_name }} had {{ loser_points }} points</h5>
+            <a href="{% url 'index' %}" method="get">click here to play again! </a>
+            </div>
+        {% endif %}
 {% endblock %}

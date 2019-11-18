@@ -1,110 +1,118 @@
-{% extends "game/layout.html"%}
+{% extends "game/layout.html" %}
 {% block body %}
-{%if message%}
-<h3 class="text-center"> {{message}} </h3>
-{%else%}
+    {% if message %}
+        <h3 class="text-center"> {{ message }} </h3>
+    {% else %}
 
-<h3 class="text-center"> Choose teams to play the game with! </h3>
-<form class="form" action="{% url 'seconds'%}" method="post">
-<div class="container">
-  <h3 class="text-center"> Team 1 </h3>
-  <div class="row">
+        <h3 class="text-center"> Choose teams to play the game with! </h3>
+        <form class="form" action="{% url 'seconds' %}" method="post">
+            <div class="container">
+                <h3 class="text-center"> Team 1 </h3>
+                <div class="row">
 
 
-    <div class="col align-self-start">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Team member 1</span>
-          </div>
-          <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t11">
-        </div>
-    </div>
-    </div>
+                    <div class="col align-self-start">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Team member 1</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Name" aria-label="Username"
+                                   aria-describedby="basic-addon1" name="t11">
+                        </div>
+                    </div>
+                </div>
 
-<div class="row">
-    <div class="col align-self-start">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Team member 2</span>
-          </div>
-          <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t12">
-        </div>
-    </div>
-    </div>
-    <div class="row">
+                <div class="row">
+                    <div class="col align-self-start">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Team member 2</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Name" aria-label="Username"
+                                   aria-describedby="basic-addon1" name="t12">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
 
-    <div class="col align-self-start">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Team member 3</span>
-          </div>
-          <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t13">
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col align-self-start">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Team member 4</span>
-          </div>
-          <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t14">
-        </div>
-    </div>
-  </div>
-  </div>
-
-  <div class="container">
-    <h3 class="text-center"> Team 2 </h3>
-    <div class="row">
-
-          <div class="col-sm">
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">Team member 1</span>
+                    <div class="col align-self-start">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Team member 3</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Name" aria-label="Username"
+                                   aria-describedby="basic-addon1" name="t13">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col align-self-start">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Team member 4</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Name" aria-label="Username"
+                                   aria-describedby="basic-addon1" name="t14">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t21">
-          </div>
-          </div>
-          </div>
+
+            <div class="container">
+                <h3 class="text-center"> Team 2 </h3>
+                <div class="row">
+
+                    <div class="col-sm">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Team member 1</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Name" aria-label="Username"
+                                   aria-describedby="basic-addon1" name="t21">
+                        </div>
+                    </div>
+                </div>
 
 
-<div class="row">
-<div class="col-sm">
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">Team member 2</span>
-  </div>
-  <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t22">
-</div>
-</div>
-</div>
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Team member 2</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Name" aria-label="Username"
+                                   aria-describedby="basic-addon1" name="t22">
+                        </div>
+                    </div>
+                </div>
 
-<div class="row">
-<div class="col-sm">
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">Team member 3</span>
-  </div>
-  <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t23">
-</div>
-</div>
-</div>
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Team member 3</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Name" aria-label="Username"
+                                   aria-describedby="basic-addon1" name="t23">
+                        </div>
+                    </div>
+                </div>
 
-<div class="row">
-<div class="col-sm">
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">Team member 4</span>
-  </div>
-  <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="t24">
-</div>
-</div>
-</div>
-<p class="text-center">
-<button class="btn btn-primary" type="submit">Submit teams</button>
-</p>
-</form>
-{%endif%}
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Team member 4</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Name" aria-label="Username"
+                                   aria-describedby="basic-addon1" name="t24">
+                        </div>
+                    </div>
+                </div>
+                <p class="text-center">
+                    <button class="btn btn-primary" type="submit">Submit teams</button>
+                </p>
+        </form>
+    {% endif %}
 
 {% endblock %}
