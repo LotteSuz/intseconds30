@@ -41,15 +41,13 @@ def get_card(request: HttpRequest):
             return JsonResponse({"error": "Token expired or invalid"})
 
         # Check is the session has seen all the cards
-        if Card.objects.count() is session.used_cards.count():
+        card = session.get_card()
+
+        if card:
+            return JsonResponse(card.json())
+        else:
             return JsonResponse({"error": "All cards have been used"})
 
-        # Find a new Card
-        while True:
-            card = Card.random()
-            if card not in session.used_cards.all():
-                session.used_cards.add(card)
-                return JsonResponse(card.json())
     else:
         # Just a random question
         return JsonResponse(Card.random().json())

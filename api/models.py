@@ -97,3 +97,12 @@ class Session(models.Model):
 
     secret = models.fields.CharField(max_length=16, default=random_secret)
     used_cards = models.ManyToManyField(Card, blank=True)
+
+    def get_card(self):
+        if Card.objects.count() == self.used_cards.count():
+            return None
+        while True:
+            card = Card.random()
+            if card not in self.used_cards.all():
+                self.used_cards.add(card)
+                return card
