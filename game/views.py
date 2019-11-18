@@ -28,8 +28,8 @@ def seconds(request):
     global team1_players
     global team2_players
     if round_counter == 0:
+        print(f'een: {request.build_absolute_uri(reverse("api:get-token"))}')
         res = requests.get(request.build_absolute_uri(reverse("api:get-token"))).json()
-        # print(res.body)
 
         #res = requests.get("http://127.0.0.1:8000/api/get_token").json()
         request.session['token'] = res['token']
@@ -90,6 +90,7 @@ def seconds(request):
     secret = request.session['secret']
     player = request.session['turn']
     link = request.build_absolute_uri(reverse("api:get-card"))
+    print(f'twee {link}')
     card = requests.get(f"{link}?token={token}&secret={secret}").json()['words']
     round_counter += 1
     return render(request, "game/seconds.html", {'card':card, 'player':player})
