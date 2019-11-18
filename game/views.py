@@ -49,15 +49,16 @@ def seconds(request):
     round = request.session['round']
     # append points
     if round % 2 == 0:
-        request.session['turn'] = request.session['team1'][int(round/2)]
         points = len(hits)
         request.session['scoreteam1'] += points
+        if round != max_rounds:
+            request.session['turn'] = request.session['team1'][int(round/2)]
     else:
-        request.session['turn'] = request.session['team2'][int(round/2)]
         points = len(hits)
         request.session['scoreteam2'] += points
+        if round != max_rounds:
+            request.session['turn'] = request.session['team2'][int(round/2)]
 
-    print("CURREND ROUND = ", request.session['round'])
     # determine winner
     if round == max_rounds:
         request.session['round'] = 0
