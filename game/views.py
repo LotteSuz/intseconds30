@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import requests
@@ -28,7 +28,10 @@ def seconds(request):
     global team1_players
     global team2_players
     if round_counter == 0:
-        res = requests.get("http://127.0.0.1:8000/api/get_token").json()
+        res = requests.get(request.build_absolute_uri(reverse("api:get-token"))).json()
+        # print(res.body)
+
+        #res = requests.get("http://127.0.0.1:8000/api/get_token").json()
         request.session['token'] = res['token']
         request.session['secret'] = res['secret']
         for i in range(1,5):
@@ -86,6 +89,7 @@ def seconds(request):
     token = request.session['token']
     secret = request.session['secret']
     player = request.session['turn']
-    card = requests.get(f"http://127.0.0.1:8000/api/get_card?token={token}&secret={secret}").json()['words']
+    link = request.build_absolute_uri(reverse("api:get-card"))
+    card = requests.get(f"{link}?token={token}&secret={secret}").json()['words']
     round_counter += 1
     return render(request, "game/seconds.html", {'card':card, 'player':player})

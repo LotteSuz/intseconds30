@@ -19,7 +19,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     #path('game', include('game.urls')), >> waarom werkt dit niet?
-    path('api/', include('api.urls')),
+    path('api/', include('api.urls', namespace='api')),
     path('', include('game.urls')),
     path('admin/', admin.site.urls),
 ]

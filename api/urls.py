@@ -2,6 +2,7 @@ from django.urls import path
 
 from . import views
 
+app_name = 'api'
 urlpatterns = [
     path('', views.index, name='index'),
     path('card/<int:card_nr>', views.card_by_id, name='card'),

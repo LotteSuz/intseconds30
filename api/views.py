@@ -22,7 +22,7 @@ def get_token(request):
     session.save()
     return JsonResponse({'token': session.id,
                          'secret': session.secret,
-                         'get_card': f"{reverse('get-card')}?token={session.id}&secret={session.secret}"
+                         'get_card': f"{reverse('api:get-card')}?token={session.id}&secret={session.secret}"
                          })
 
 
